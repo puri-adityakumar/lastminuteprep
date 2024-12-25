@@ -4,6 +4,8 @@ Imagine this: You're cramming for that big exam, and the stress is real. Wouldn'
 
 Introducing "Last Minute Prep", your new go-to for mastering multiple-choice questions (MCQs). This interactive web app is designed to make your study sessions enjoyable and productive.
 
+## [LIVE LINK 🪴](https://lastminuteprep.vercel.app/)
+
 ## 🌟 Key Features
 
 ### Effortless Learning:
