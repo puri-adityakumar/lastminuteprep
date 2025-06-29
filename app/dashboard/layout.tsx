@@ -1,6 +1,7 @@
 import { createClient } from '@/lib/supabase/server'
 import { DashboardSidebar } from '@/components/dashboard/DashboardSidebar'
 import { DashboardHeader } from '@/components/dashboard/DashboardHeader'
+import { redirect } from 'next/navigation'
 
 export default async function DashboardLayout({
   children,
@@ -12,6 +13,10 @@ export default async function DashboardLayout({
   const {
     data: { user },
   } = await supabase.auth.getUser()
+
+  if (!user) {
+    redirect('/auth/signin?redirectTo=/dashboard')
+  }
 
   return (
     <div className="min-h-screen bg-[#F1F0E8] dark:bg-black">
