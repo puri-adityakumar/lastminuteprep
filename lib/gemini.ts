@@ -8,7 +8,7 @@ export async function generateQuizWithGemini(
   numQuestions: number = 10,
   difficulty: 'easy' | 'medium' | 'hard' = 'medium'
 ): Promise<QuizFile> {
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-1.0-pro' });
 
   const prompt = `Generate a multiple choice quiz about "${topic}" with exactly ${numQuestions} questions at ${difficulty} difficulty level.
 
