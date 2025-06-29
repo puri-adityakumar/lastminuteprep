@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -19,8 +19,11 @@ export default function SignInPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { toast } = useToast()
   const supabase = createClient()
+
+  const redirectTo = searchParams.get('redirectTo') || '/dashboard'
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -43,7 +46,7 @@ export default function SignInPage() {
         description: 'You have been signed in successfully.',
       })
 
-      router.push('/quiz-practice')
+      router.push(redirectTo)
       router.refresh()
     } catch (err) {
       setError('An unexpected error occurred')
