@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import { FileJson, MessagesSquare, Save, Play, Sparkles, LucideIcon } from 'lucide-react';
+import { FileJson, MessagesSquare, Save, Play, Sparkles, DivideIcon as LucideIcon } from 'lucide-react';
 import Link from 'next/link';
 
 // Internal Components
