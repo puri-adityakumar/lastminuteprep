@@ -4,7 +4,7 @@ import { AIQuizDialog } from '@/components/quiz/AIQuizDialog';
 import { SampleQuiz } from '@/components/quiz/SampleQuiz';
 import Link from 'next/link';
 
-export default function GenerateMCQPage() {
+export default function QuizPracticePage() {
   return (
     <main className="min-h-screen bg-[#F1F0E8] dark:bg-black">
       <div className="container mx-auto px-4 py-16">

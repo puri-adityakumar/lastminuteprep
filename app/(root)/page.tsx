@@ -23,7 +23,7 @@ export default function HomePage() {
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center pt-8">
-            <Link href="/generate-mcq">
+            <Link href="/quiz-practice">
               <Button size="lg" className="font-mono text-lg px-8 hover:scale-105 transition-transform">
                 <Zap className="mr-2 h-5 w-5" />
                 Start Practicing
@@ -132,7 +132,7 @@ export default function HomePage() {
             Join thousands of students who have improved their test scores with Last Minute Prep
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/generate-mcq">
+            <Link href="/quiz-practice">
               <Button size="lg" className="font-mono text-lg px-8 hover:scale-105 transition-transform">
                 Get Started Now
               </Button>

@@ -55,7 +55,7 @@ export function QuizResults() {
             <RefreshCw className="mr-2 h-4 w-4" />
             Try Again
           </Button>
-          <Link href="/generate-mcq" className="w-full">
+          <Link href="/quiz-practice" className="w-full">
             <Button variant="outline" className="w-full">
               <Home className="mr-2 h-4 w-4" />
               Back to Practice
