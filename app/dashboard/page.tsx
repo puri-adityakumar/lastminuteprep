@@ -9,6 +9,7 @@ export default async function DashboardPage() {
     data: { user },
   } = await supabase.auth.getUser()
 
+  // This check is redundant since middleware handles it, but keeping for safety
   if (!user) {
     redirect('/auth/signin')
   }
