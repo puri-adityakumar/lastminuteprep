@@ -44,8 +44,19 @@ export function AIQuizDialog() {
       return;
     }
 
+    if (numQuestions < 5 || numQuestions > 25) {
+      toast({
+        title: 'Error',
+        description: 'Number of questions must be between 5 and 25',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     setLoading(true);
     try {
+      console.log('Generating quiz with:', { topic: topic.trim(), numQuestions, difficulty });
+      
       const response = await fetch('/api/generate-quiz', {
         method: 'POST',
         headers: {
@@ -58,13 +69,19 @@ export function AIQuizDialog() {
         }),
       });
 
+      console.log('API response status:', response.status);
+
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to generate quiz');
+        console.error('API error:', errorData);
+        throw new Error(errorData.error || `HTTP ${response.status}: Failed to generate quiz`);
       }
 
       const quizData = await response.json();
+      console.log('Received quiz data:', quizData);
+      
       const quiz = QuizFileSchema.parse(quizData);
+      console.log('Validated quiz:', quiz);
 
       setQuiz(quiz);
       setOpen(false);
@@ -78,7 +95,7 @@ export function AIQuizDialog() {
       console.error('Error generating quiz:', error);
       toast({
         title: 'Error',
-        description: error instanceof Error ? error.message : 'Failed to generate quiz',
+        description: error instanceof Error ? error.message : 'Failed to generate quiz. Please try again.',
         variant: 'destructive',
       });
     } finally {
@@ -158,11 +175,10 @@ export function AIQuizDialog() {
             )}
           </Button>
 
-          {!process.env.NEXT_PUBLIC_GEMINI_API_KEY && (
-            <p className="text-xs text-muted-foreground text-center">
-              Note: Gemini API key required for AI quiz generation
-            </p>
-          )}
+          <div className="text-xs text-muted-foreground text-center space-y-1">
+            <p>Powered by Google Gemini AI</p>
+            <p>Generate quizzes on any topic instantly!</p>
+          </div>
         </div>
       </DialogContent>
     </Dialog>

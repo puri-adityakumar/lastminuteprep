@@ -8,11 +8,12 @@ export async function generateQuizWithGemini(
   numQuestions: number = 10,
   difficulty: 'easy' | 'medium' | 'hard' = 'medium'
 ): Promise<QuizFile> {
-  const model = genAI.getGenerativeModel({ model: 'gemini-pro' });
+  const model = genAI.getGenerativeModel({ model: 'gemini-1.5-flash' });
 
   const prompt = `Generate a multiple choice quiz about "${topic}" with exactly ${numQuestions} questions at ${difficulty} difficulty level.
 
-Please follow this exact JSON format:
+You must respond with ONLY valid JSON in this exact format:
+
 {
   "title": "Quiz about ${topic}",
   "description": "A ${difficulty} level quiz covering various aspects of ${topic}",
@@ -39,7 +40,7 @@ Requirements:
 - Include helpful explanations for each answer
 - Make questions ${difficulty} difficulty level
 - Ensure questions are diverse and cover different aspects of the topic
-- Return only valid JSON, no additional text
+- Return ONLY valid JSON, no markdown formatting, no additional text
 
 Topic: ${topic}
 Difficulty: ${difficulty}
@@ -50,39 +51,73 @@ Number of questions: ${numQuestions}`;
     const response = await result.response;
     const text = response.text();
     
+    console.log('Raw AI response:', text);
+    
     // Clean the response to extract JSON
-    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    let cleanedText = text.trim();
+    
+    // Remove markdown code blocks if present
+    cleanedText = cleanedText.replace(/```json\s*/g, '').replace(/```\s*/g, '');
+    
+    // Find JSON object
+    const jsonMatch = cleanedText.match(/\{[\s\S]*\}/);
     if (!jsonMatch) {
-      throw new Error('No valid JSON found in response');
+      console.error('No JSON found in response:', text);
+      throw new Error('No valid JSON found in AI response');
     }
     
     const jsonText = jsonMatch[0];
-    const quiz = JSON.parse(jsonText);
+    console.log('Extracted JSON:', jsonText);
+    
+    let quiz;
+    try {
+      quiz = JSON.parse(jsonText);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError);
+      console.error('Failed to parse:', jsonText);
+      throw new Error('Invalid JSON format in AI response');
+    }
     
     // Validate the structure
     if (!quiz.title || !quiz.questions || !Array.isArray(quiz.questions)) {
-      throw new Error('Invalid quiz structure');
+      console.error('Invalid quiz structure:', quiz);
+      throw new Error('Invalid quiz structure from AI');
     }
     
     // Ensure we have the right number of questions
     if (quiz.questions.length !== numQuestions) {
-      throw new Error(`Expected ${numQuestions} questions, got ${quiz.questions.length}`);
+      console.warn(`Expected ${numQuestions} questions, got ${quiz.questions.length}`);
+      // Trim or pad questions as needed
+      if (quiz.questions.length > numQuestions) {
+        quiz.questions = quiz.questions.slice(0, numQuestions);
+      }
     }
     
-    // Validate each question
+    // Validate and fix each question
     quiz.questions.forEach((q: any, index: number) => {
       if (!q.id) q.id = `q${index + 1}`;
-      if (!q.question || !Array.isArray(q.options) || q.options.length !== 4) {
-        throw new Error(`Invalid question structure at index ${index}`);
+      if (!q.question || typeof q.question !== 'string') {
+        throw new Error(`Invalid question at index ${index}`);
+      }
+      if (!Array.isArray(q.options) || q.options.length !== 4) {
+        throw new Error(`Invalid options at index ${index}`);
       }
       if (typeof q.correctAnswer !== 'number' || q.correctAnswer < 0 || q.correctAnswer > 3) {
-        throw new Error(`Invalid correctAnswer at index ${index}`);
+        console.warn(`Invalid correctAnswer at index ${index}, defaulting to 0`);
+        q.correctAnswer = 0;
+      }
+      if (!q.explanation || typeof q.explanation !== 'string') {
+        q.explanation = 'No explanation provided.';
       }
     });
     
+    console.log('Successfully generated quiz:', quiz);
     return quiz as QuizFile;
   } catch (error) {
     console.error('Error generating quiz:', error);
+    if (error instanceof Error) {
+      throw error;
+    }
     throw new Error('Failed to generate quiz. Please try again.');
   }
 }
