@@ -1,4 +1,4 @@
-# 📚 Last Minute Prep
+# 📚 Last Minute Prep!
 
 Imagine this: You're cramming for that big exam, and the stress is real. Wouldn't it be awesome to have a study buddy that's fun, efficient, and always available?
 
@@ -9,10 +9,12 @@ Introducing "Last Minute Prep", your new go-to for mastering multiple-choice que
 ## 🌟 Key Features
 
 ### Effortless Learning:
+
 - 🚀 Interactive MCQ practice sessions with instant feedback
 - 📊 Track your progress and identify areas for improvement
 
 ### Sleek & User-Friendly:
+
 - 🎨 Modern and intuitive design with a sticky navigation bar
 - 🌗 Seamlessly switch between light and dark modes
 - 📱 Responsive design for a flawless experience on any device
@@ -31,26 +33,30 @@ Introducing "Last Minute Prep", your new go-to for mastering multiple-choice que
 ## 🚀 Ready to Level Up Your Learning?
 
 ## Setup Guide
+
 To get started with Last Minute Prep, follow these steps:
 
 1. **Clone the repository**:
+
    ```bash
    git clone <repository-url>
    cd mcq-practice
    ```
 
 2. **Install dependencies**:
+
    ```bash
    npm install
    ```
 
-3. **Start the development server**:    
+3. **Start the development server**:
    ```bash
-   npm run dev  
+   npm run dev
    ```
-4. **Open your browser and navigate to**  `http://localhost:3000`
+4. **Open your browser and navigate to** `http://localhost:3000`
 
 ## License
+
 This project is licensed under the MIT License. See the LICENSE file for details.
 
 Buy Me a Coffee
