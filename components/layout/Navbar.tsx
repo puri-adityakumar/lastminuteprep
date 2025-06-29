@@ -43,6 +43,11 @@ export function Navbar() {
         </div>
         <div className="flex items-center space-x-6">
           <nav className="hidden md:flex items-center space-x-6">
+            {user && (
+              <Link href="/dashboard" className="text-sm font-medium transition-colors hover:text-primary">
+                Dashboard
+              </Link>
+            )}
             <Link href="/quiz-practice" className="text-sm font-medium transition-colors hover:text-primary">
               Practice
             </Link>
