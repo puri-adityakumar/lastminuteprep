@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   DropdownMenu,
@@ -39,8 +39,9 @@ export function UserMenu({ user }: UserMenuProps) {
         title: 'Signed out',
         description: 'You have been signed out successfully.',
       })
-      // Force a page refresh to update auth state
-      window.location.href = '/auth/signin'
+      // Use router.push instead of window.location.href
+      router.push('/auth/signin')
+      router.refresh()
     } catch (error) {
       toast({
         title: 'Error',

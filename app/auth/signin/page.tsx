@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -18,12 +18,17 @@ export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [mounted, setMounted] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
   const { toast } = useToast()
   const supabase = createClient()
 
-  const redirectTo = searchParams.get('redirectTo') || '/dashboard'
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  const redirectTo = searchParams?.get('redirectTo') || '/dashboard'
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -47,14 +52,20 @@ export default function SignInPage() {
           description: 'You have been signed in successfully.',
         })
 
-        // Force a page refresh to update auth state
-        window.location.href = redirectTo
+        // Use router.push instead of window.location.href to avoid the invariant error
+        router.push(redirectTo)
+        router.refresh()
       }
     } catch (err) {
       setError('An unexpected error occurred')
     } finally {
       setLoading(false)
     }
+  }
+
+  // Don't render until mounted to avoid hydration issues
+  if (!mounted) {
+    return null
   }
 
   return (
