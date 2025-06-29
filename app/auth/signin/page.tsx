@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -44,8 +44,8 @@ export default function SignInPage() {
           description: 'You have been signed in successfully.',
         })
 
-        router.push('/dashboard')
-        router.refresh()
+        // Simple redirect without complex parameter handling
+        window.location.href = '/dashboard'
       }
     } catch (err) {
       setError('An unexpected error occurred')

@@ -39,9 +39,8 @@ export function UserMenu({ user }: UserMenuProps) {
         title: 'Signed out',
         description: 'You have been signed out successfully.',
       })
-      // Use router.push instead of window.location.href
-      router.push('/auth/signin')
-      router.refresh()
+      // Use window.location.href for clean redirect
+      window.location.href = '/auth/signin'
     } catch (error) {
       toast({
         title: 'Error',

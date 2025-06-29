@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
@@ -21,14 +21,9 @@ export default function SignUpPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
-  const [mounted, setMounted] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
   const supabase = createClient()
-
-  useEffect(() => {
-    setMounted(true)
-  }, [])
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -69,18 +64,14 @@ export default function SignUpPage() {
           description: 'Please check your email to verify your account.',
         })
 
-        router.push('/auth/verify-email')
+        // Simple redirect without complex parameter handling
+        window.location.href = '/auth/verify-email'
       }
     } catch (err) {
       setError('An unexpected error occurred')
     } finally {
       setLoading(false)
     }
-  }
-
-  // Don't render until mounted to avoid hydration issues
-  if (!mounted) {
-    return null
   }
 
   return (
