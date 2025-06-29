@@ -52,9 +52,8 @@ export default function SignInPage() {
           description: 'You have been signed in successfully.',
         })
 
-        // Use router.push instead of window.location.href to avoid the invariant error
-        router.push(redirectTo)
-        router.refresh()
+        // Force a page refresh to ensure middleware runs properly
+        window.location.href = redirectTo
       }
     } catch (err) {
       setError('An unexpected error occurred')
