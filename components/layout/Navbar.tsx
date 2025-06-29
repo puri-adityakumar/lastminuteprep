@@ -11,7 +11,7 @@ export function Navbar() {
         <div className="flex-1">
           <Link href="/" className="flex items-center space-x-3 pl-2">
             <GraduationCap className="h-6 w-6" />
-            <span className="font-mono font-bold text-xl">Last Minute Prep</span>
+            <span className="font-mono font-bold text-xl">CramJam</span>
           </Link>
         </div>
         <div className="flex items-center space-x-6">

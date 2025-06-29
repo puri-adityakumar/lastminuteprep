@@ -10,7 +10,7 @@ export function Footer() {
             Made with fear of exams 📚
           </p>
           <Link
-            href="https://github.com/puri-adityakumar/lastminuteprep"
+            href="https://github.com/puri-adityakumar/cramjam"
             target="_blank"
             rel="noopener noreferrer"
             className="text-sm text-muted-foreground hover:text-foreground transition-colors flex items-center space-x-2"

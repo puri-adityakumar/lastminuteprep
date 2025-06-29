@@ -1,10 +1,10 @@
-# 📚 Last Minute Prep
+# 📚 CramJam
 
 Imagine this: You're cramming for that big exam, and the stress is real. Wouldn't it be awesome to have a study buddy that's fun, efficient, and always available?
 
-Introducing "Last Minute Prep", your new go-to for mastering multiple-choice questions (MCQs). This interactive web app is designed to make your study sessions enjoyable and productive.
+Introducing "CramJam", your new go-to for mastering multiple-choice questions (MCQs). This interactive web app is designed to make your study sessions enjoyable and productive.
 
-## [LIVE LINK 🪴](https://lastminuteprep.vercel.app/)
+## [LIVE LINK 🪴](https://cramjam.vercel.app/)
 
 ## 🌟 Key Features
 
@@ -31,12 +31,12 @@ Introducing "Last Minute Prep", your new go-to for mastering multiple-choice que
 ## 🚀 Ready to Level Up Your Learning?
 
 ## Setup Guide
-To get started with Last Minute Prep, follow these steps:
+To get started with CramJam, follow these steps:
 
 1. **Clone the repository**:
    ```bash
    git clone <repository-url>
-   cd mcq-practice
+   cd cramjam
    ```
 
 2. **Install dependencies**:

@@ -14,11 +14,11 @@ export default function HomePage() {
           </div>
           
           <h1 className="text-6xl font-mono font-bold tracking-tight">
-            Last Minute Prep
+            CramJam
           </h1>
           
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-            Your ultimate companion for exam preparation. Master multiple-choice questions, 
+            Your ultimate exam preparation companion. Master multiple-choice questions, 
             track your progress, and boost your confidence with our intelligent practice platform.
           </p>
           
@@ -43,7 +43,7 @@ export default function HomePage() {
       <section className="container mx-auto px-4 py-16">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-3xl font-mono font-bold text-center mb-12">
-            Why Choose Last Minute Prep?
+            Why Choose CramJam?
           </h2>
           
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -129,7 +129,7 @@ export default function HomePage() {
             Ready to Ace Your Exams?
           </h2>
           <p className="text-xl text-muted-foreground">
-            Join thousands of students who have improved their test scores with Last Minute Prep
+            Join thousands of students who have improved their test scores with CramJam
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/quiz-practice">

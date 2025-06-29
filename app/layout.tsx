@@ -18,8 +18,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: 'last Minute Prep',
-  description: 'A quiz app for students'
+  title: 'CramJam',
+  description: 'Your ultimate exam preparation companion - Master MCQs, track progress, and ace your tests'
 };
 
 export default function RootLayout({
