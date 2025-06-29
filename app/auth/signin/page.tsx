@@ -31,7 +31,7 @@ export default function SignInPage() {
     setError('')
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
       })
@@ -41,13 +41,15 @@ export default function SignInPage() {
         return
       }
 
-      toast({
-        title: 'Welcome back!',
-        description: 'You have been signed in successfully.',
-      })
+      if (data.user) {
+        toast({
+          title: 'Welcome back!',
+          description: 'You have been signed in successfully.',
+        })
 
-      router.push(redirectTo)
-      router.refresh()
+        // Force a page refresh to update auth state
+        window.location.href = redirectTo
+      }
     } catch (err) {
       setError('An unexpected error occurred')
     } finally {

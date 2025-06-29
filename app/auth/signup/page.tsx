@@ -43,7 +43,7 @@ export default function SignUpPage() {
     }
 
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email,
         password,
         options: {
@@ -58,12 +58,14 @@ export default function SignUpPage() {
         return
       }
 
-      toast({
-        title: 'Account created!',
-        description: 'Please check your email to verify your account.',
-      })
+      if (data.user) {
+        toast({
+          title: 'Account created!',
+          description: 'Please check your email to verify your account.',
+        })
 
-      router.push('/auth/verify-email')
+        router.push('/auth/verify-email')
+      }
     } catch (err) {
       setError('An unexpected error occurred')
     } finally {

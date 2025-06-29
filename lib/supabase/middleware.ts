@@ -41,10 +41,10 @@ export async function updateSession(request: NextRequest) {
     request.nextUrl.pathname.startsWith(route)
   )
 
-  // Public routes that don't require authentication
-  const publicRoutes = ['/', '/tutorial', '/quiz-practice', '/auth']
-  const isPublicRoute = publicRoutes.some(route => 
-    request.nextUrl.pathname.startsWith(route)
+  // Auth routes that authenticated users shouldn't access
+  const authRoutes = ['/auth/signin', '/auth/signup', '/auth/forgot-password']
+  const isAuthRoute = authRoutes.some(route => 
+    request.nextUrl.pathname === route
   )
 
   // If user is not authenticated and trying to access protected route
@@ -56,8 +56,7 @@ export async function updateSession(request: NextRequest) {
   }
 
   // If user is authenticated and trying to access auth pages, redirect to dashboard
-  if (user && request.nextUrl.pathname.startsWith('/auth') && 
-      !request.nextUrl.pathname.includes('/callback')) {
+  if (user && isAuthRoute) {
     const url = request.nextUrl.clone()
     url.pathname = '/dashboard'
     return NextResponse.redirect(url)

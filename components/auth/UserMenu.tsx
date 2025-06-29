@@ -39,8 +39,8 @@ export function UserMenu({ user }: UserMenuProps) {
         title: 'Signed out',
         description: 'You have been signed out successfully.',
       })
-      router.push('/auth/signin')
-      router.refresh()
+      // Force a page refresh to update auth state
+      window.location.href = '/auth/signin'
     } catch (error) {
       toast({
         title: 'Error',
@@ -91,9 +91,11 @@ export function UserMenu({ user }: UserMenuProps) {
             <span>Dashboard</span>
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          <User className="mr-2 h-4 w-4" />
-          <span>Profile</span>
+        <DropdownMenuItem asChild>
+          <Link href="/dashboard/profile">
+            <User className="mr-2 h-4 w-4" />
+            <span>Profile</span>
+          </Link>
         </DropdownMenuItem>
         <DropdownMenuItem>
           <Settings className="mr-2 h-4 w-4" />
