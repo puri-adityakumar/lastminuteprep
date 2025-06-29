@@ -15,6 +15,14 @@ export function Navbar() {
           </Link>
         </div>
         <div className="flex items-center space-x-6">
+          <nav className="hidden md:flex items-center space-x-6">
+            <Link href="/generate-mcq" className="text-sm font-medium transition-colors hover:text-primary">
+              Practice
+            </Link>
+            <Link href="/tutorial" className="text-sm font-medium transition-colors hover:text-primary">
+              Tutorial
+            </Link>
+          </nav>
           <ThemeSwitcher />
         </div>
       </div>
